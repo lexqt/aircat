@@ -15,14 +15,27 @@ class GeoProviderTest(unittest.TestCase):
         cls.gp = GeoProvider()
 
     def test_country_names(self):
-        # apinfo.ru/export.csv contains rows:
-        # ...|Россия|Russian Federation|RU|...
-        # ...|США|United States|US|...
+        # geonames.org/countryInfoCSV{,_ru}.csv contain rows:
+        # RU  ...  Russia
+        # RU  ...  Россия
+        # US  ...  United States
+        # US  ...  США
         self.assertEqual(self.gp.country_names('RU'),
-                         ('Russian Federation', 'Россия'))
+                         ('Russia', 'Россия'))
         self.assertEqual(self.gp.country_names('US'),
                          ('United States', 'США'))
         self.assertIsNone(self.gp.country_names('XX'))
+
+    def test_country_iso_code(self):
+        # apinfo.ru/export.csv contains rows:
+        # ...|Россия|Russian Federation|RU|...
+        # ...|США|United States|US|...
+        # geonames.org/countryInfoCSV.csv contains rows:
+        # RU  ...  Russia
+        self.assertEqual(self.gp.country_iso_code('Russian Federation'), 'RU')
+        self.assertEqual(self.gp.country_iso_code('Russia'), 'RU')
+        self.assertEqual(self.gp.country_iso_code('United States'), 'US')
+        self.assertIsNone(self.gp.country_iso_code('XX'))
 
     def test_country_latlon(self):
         # maxmind.com/country_latlon.csv contains rows:

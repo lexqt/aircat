@@ -9,10 +9,11 @@
 
  *  *cities1000.csv* - http://download.geonames.org/export/dump/cities1000.zip
  *  **CSV structure**: geonameid, name, asciiname, alternatenames, latitude, longitude, feature class, feature code, country code, cc2, admin1 code, admin2 code, admin3 code, admin4 code, population, elevation, dem, timezone, modification date
-
-    delimiter: tab
-
-    http://download.geonames.org/export/dump/readme.txt
+ *  *countryInfoCSV.csv* - http://ws.geonames.org/countryInfoCSV
+ *  *countryInfoCSV_ru.csv* - http://ws.geonames.org/countryInfoCSV?lang=ru
+ *  **CSV structure**: iso alpha2, iso alpha3, iso numeric, fips code, name, capital, areaInSqKm, population, continent, languages, currency, geonameId
+ *  Delimiters: tab
+ *  Read more on http://download.geonames.org/export/dump/readme.txt
 
 ## maxmind.com ##
 
