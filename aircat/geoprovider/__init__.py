@@ -1,1 +1,1 @@
-from geoprovider.geoprovider import GeoProvider, Error
+from .geoprovider import GeoProvider, Error

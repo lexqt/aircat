@@ -30,18 +30,18 @@ class GeoProvider(object):
         # Country ISO alpha-2 -> City name -> (name, name_ru)
 
         with open(os.path.join(DATA_DIR, 'apinfo.ru/export.csv'), 'rb') as f:
-            reader = csv.reader(line_decoder(f, 'cp1251'),
-                                delimiter='|', quoting=csv.QUOTE_NONE)
+            reader = csv.reader(f, delimiter='|', quoting=csv.QUOTE_NONE)
             try:
                 reader.next()  # pop headers line
             except StopIteration:
                 pass
             try:
                 for row in reader:
-                    airport_data[row[0]] = (row[3], row[2].decode('utf8'),
+                    row = map(lambda c: c.decode('cp1251'), row)
+                    airport_data[row[0]] = (row[3], row[2],
                                             row[8], row[5])
-                    country_names[row[8]] = (row[7], row[6].decode('utf8'))
-                    city_names.setdefault(row[8], {})[row[5]] = (row[5], row[4].decode('utf8'))
+                    country_names[row[8]] = (row[7], row[6])
+                    city_names.setdefault(row[8], {})[row[5]] = (row[5], row[4])
             except (IndexError, UnicodeDecodeError):
                 raise Error('Invalid data file')
 
@@ -53,13 +53,13 @@ class GeoProvider(object):
         # Country ISO alpha-2 -> City name -> List of alternative names
 
         with open(os.path.join(DATA_DIR, 'geonames.org/cities1000.csv'), 'rb') as f:
-            reader = csv.reader(line_decoder(f, 'utf8'),
-                                delimiter='\t', quoting=csv.QUOTE_NONE)
+            reader = csv.reader(f, delimiter='\t', quoting=csv.QUOTE_NONE)
             try:
                 for row in reader:
-                    name, asciiname = row[1].decode('utf8'), row[2]
+                    row = map(lambda c: c.decode('utf8'), row)
+                    name, asciiname = row[1], row[2]
                     city_latlon.setdefault(row[8], {})[asciiname] = (row[4], row[5])
-                    alternatives = row[3].decode('utf8')
+                    alternatives = row[3]
                     if not alternatives:
                         continue
                     coll = city_alt_names.setdefault(row[8], {})
@@ -142,8 +142,3 @@ class GeoProvider(object):
         for alt_name in cities[name]:
             if alt_name in coll:
                 return coll[alt_name]
-
-
-def line_decoder(f, encoding):
-    for line in f:
-        yield line.decode(encoding)
