@@ -7,8 +7,11 @@ from geoprovider import GeoProvider
 
 
 class GeoProviderTest(unittest.TestCase):
-    '''Test GeoProvider functionality on concrete dataset (*.csv from data dir)
-    '''
+
+    """Test GeoProvider functionality
+
+    Tests based on concrete dataset (*.csv from data dir)
+    """
 
     @classmethod
     def setUpClass(cls):

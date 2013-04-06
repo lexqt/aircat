@@ -99,13 +99,15 @@ class GeoProvider(object):
             reader = self.prepare_reader(f, fmeta)
             try:
                 for row in reader:
-                    name, asciiname = row[1], row[2]
-                    city_latlon.setdefault(row[8], {})[asciiname] = (row[4], row[5])
+                    name, asciiname, iso = row[1], row[2], row[8]
+                    city_latlon.setdefault(iso, {})[asciiname] = (row[4],
+                                                                  row[5])
                     alternatives = row[3]
                     if not alternatives:
                         continue
-                    coll = city_alt_names.setdefault(row[8], {})
-                    alternatives = set(alternatives.split(',') + [name, asciiname])
+                    coll = city_alt_names.setdefault(iso, {})
+                    alternatives = set(alternatives.split(',') +
+                                       [name, asciiname])
                     for name in alternatives:
                         coll[name] = alternatives
             except IndexError:
@@ -146,28 +148,25 @@ class GeoProvider(object):
                                             iso, ciname)
                     country_codes[coname] = iso
                     country_codes[coname_ru] = iso
-                    city_names.setdefault(iso, {})[ciname] = (ciname, ciname_ru)
+                    city_names.setdefault(iso, {})[ciname] = (ciname,
+                                                              ciname_ru)
             except IndexError:
                 raise Error('Invalid data file')
 
     def country_names(self, iso_code):
-        '''Return country name pair (name_eng, name_rus)'''
-
+        """Return country name pair (name_eng, name_rus)"""
         return self._country_names.get(iso_code)
 
     def country_latlon(self, iso_code):
-        '''Return country geo coords pair (latitude, longitude)'''
-
+        """Return country geo coords pair (latitude, longitude)"""
         return self._country_latlon.get(iso_code)
 
     def country_iso_code(self, name):
-        '''Return ISO code by country name'''
-
+        """Return ISO code by country name"""
         return self._country_codes.get(name)
 
     def city_names(self, iso_code, name):
-        '''Return city name pair (name_eng, name_rus)'''
-
+        """Return city name pair (name_eng, name_rus)"""
         coll = self._city_names.get(iso_code)
         if not coll:
             return
@@ -177,8 +176,7 @@ class GeoProvider(object):
         return self._try_alt_city_name(iso_code, name, coll)
 
     def city_latlon(self, iso_code, name):
-        '''Return city geo coords pair (latitude, longitude)'''
-
+        """Return city geo coords pair (latitude, longitude)"""
         coll = self._city_latlon.get(iso_code)
         if not coll:
             return
@@ -188,16 +186,14 @@ class GeoProvider(object):
         return self._try_alt_city_name(iso_code, name, coll)
 
     def airport_names(self, iata_code):
-        '''Return airport name pair (name_eng, name_rus)'''
-
+        """Return airport name pair (name_eng, name_rus)"""
         d = self._airport_data.get(iata_code)
         if not d:
             return
         return d[0:2]
 
     def country_city_by_iata(self, iata_code):
-        '''Return country ISO code and city name by airport IATA code'''
-
+        """Return country ISO code and city name by airport IATA code"""
         d = self._airport_data.get(iata_code)
         if not d:
             return
