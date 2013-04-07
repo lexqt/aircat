@@ -53,3 +53,13 @@ body {
   text-align: center;
   margin-bottom: 5px;
 }
+
+.letter-filter-panel {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #BAD3F3;
+}
+.letter-filter-panel .pagination {
+  margin-top: 0;
+  margin-bottom: 0;
+}

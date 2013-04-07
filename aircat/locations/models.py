@@ -7,13 +7,15 @@ from django.core.urlresolvers import reverse
 from django.core.validators import MinLengthValidator
 from django.utils.text import slugify
 
+
 class Location(models.Model):
 
     class Meta:
         abstract = True
 
     name = models.CharField('название', max_length=100)
-    name_ru = models.CharField('русское название', max_length=100, blank=True)
+    name_ru = models.CharField('русское название', max_length=100,
+                               db_index=True, blank=True)
     slug = models.SlugField(max_length=100, unique=True)
 
     latitude = models.DecimalField('широта', max_digits=9, decimal_places=6)

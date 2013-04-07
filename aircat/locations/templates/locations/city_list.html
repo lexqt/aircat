@@ -8,17 +8,24 @@
 	<h1>{{ country.name_ru_preferable }}</h1>
 </div>
 
+{% url 'loc:cities' country=country.iso_code as list_url %}
+{% include 'locations/snippets/letter_filter_panel.html' with show_all=include_show_all %}
+
 <div class="pull-right">
 	{% include 'locations/snippets/info_block/country.html' %}
 </div>
 
 <h2>Список городов</h2>
-<p>Выберите город для просмотра списка аэропортов в нем.</p>
 <ul class="unstyled">
 {% for city in city_list %}
-	<li><a href="{% url 'loc:airports' city=city.id %}">{{ city.extended_name }}</a></li>
+	<li><a href="{% url 'loc:airports' city=city.id %}">
+		{% if force_ru %}
+			{{ city.name_ru }}
+		{% else %}
+			{{ city.extended_name }}
+		{% endif %}</a></li>
 {% empty %}
-	<li>В БД не внесен ни один город для выбранной страны.</li>
+	<li>Не найден ни один город.</li>
 {% endfor %}
 </ul>
 

@@ -1,0 +1,21 @@
+{% load location_utils %}
+
+<div class="letter-filter-panel">
+	<div class="pagination pagination-small">
+		<ul>
+		{% for letter in 'en'|alpha_range %}
+			<li><a href="{{ list_url }}?fl_en={{ letter }}">{{ letter }}</a></li>
+		{% endfor %}
+		</ul>
+	</div>
+	<div class="pagination pagination-small">
+		<ul>
+		{% for letter in 'ru'|alpha_range %}
+			<li><a href="{{ list_url }}?fl_ru={{ letter }}">{{ letter }}</a></li>
+		{% endfor %}
+		</ul>
+	</div>
+	{% if show_all %}
+		<a class="btn btn-small" href="{{ list_url }}">Показать все</a>
+	{% endif %}
+</div>

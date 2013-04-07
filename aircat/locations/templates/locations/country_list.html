@@ -7,12 +7,20 @@
 <div class="page-header">
 	<h1>Список стран</h1>
 </div>
-<p>Выберите страну для просмотра списка городов в ней.</p>
+
+{% url 'loc:countries' as list_url %}
+{% include 'locations/snippets/letter_filter_panel.html' with show_all=include_show_all %}
+
 <ul class="unstyled">
 {% for country in country_list %}
-	<li><a href="{% url 'loc:cities' country=country.iso_code %}">{{ country.extended_name }}</a></li>
+	<li><a href="{% url 'loc:cities' country=country.iso_code %}">
+		{% if force_ru %}
+			{{ country.name_ru }}
+		{% else %}
+			{{ country.extended_name }}
+		{% endif %}</a></li>
 {% empty %}
-	<li>В БД не внесена ни одна страна.</li>
+	<li>Не найдена ни одна страна.</li>
 {% endfor %}
 </ul>
 
