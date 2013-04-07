@@ -38,6 +38,8 @@ class Country(Location):
     class Meta:
         verbose_name = 'страна'
         verbose_name_plural = 'страны'
+        ordering = ['name']
+        unique_together = ('name',)
 
     iso_code = models.CharField('ISO код', primary_key=True, max_length=2,
                                 validators=[MinLengthValidator(2)],
@@ -57,6 +59,8 @@ class City(Location):
     class Meta:
         verbose_name = 'город'
         verbose_name_plural = 'города'
+        ordering = ['name']
+        unique_together = ('country', 'name')
 
     country = models.ForeignKey(Country, related_name='cities',
                                 db_column='country_iso',
@@ -80,6 +84,8 @@ class Airport(Location):
     class Meta:
         verbose_name = 'аэропорт'
         verbose_name_plural = 'аэропорты'
+        ordering = ['name']
+        unique_together = ('city', 'name')
 
     altitude = models.IntegerField('высота')
 
