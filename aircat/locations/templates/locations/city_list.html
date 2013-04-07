@@ -4,12 +4,17 @@
 
 {% block content %}
 
-<h1>{{ country.name_ru_preferable }}</h1>
-{% include 'locations/snippets/info_block/country.html' %}
+<div class="page-header">
+	<h1>{{ country.name_ru_preferable }}</h1>
+</div>
+
+<div class="pull-right">
+	{% include 'locations/snippets/info_block/country.html' %}
+</div>
 
 <h2>Список городов</h2>
 <p>Выберите город для просмотра списка аэропортов в нем.</p>
-<ul>
+<ul class="unstyled">
 {% for city in city_list %}
 	<li><a href="{% url 'loc:airports' city=city.id %}">{{ city.extended_name }}</a></li>
 {% empty %}

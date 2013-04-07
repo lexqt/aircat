@@ -4,7 +4,12 @@
 
 {% block content %}
 
-<h1>Каталог аэропортов</h1>
-<a href="{% url 'loc:countries' %}">Перейти в каталог</a>
+<div class="hero-unit aircat-promo">
+	<h1>AirCat <small>— каталог аэропортов</small></h1>
+	<p>Каталог аэропортов мира со структуризацией по странам и городам.</p>
+	<p>
+		<a class="btn btn-primary btn-large" href="{% url 'loc:countries' %}">Открыть</a>
+	</p>
+</div>
 
 {% endblock content %}

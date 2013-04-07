@@ -4,7 +4,9 @@
 
 {% block content %}
 
-<h1>{{ airport.extended_name }} — {{ city.extended_name }} — {{ country.extended_name }}</h1>
+<div class="page-header">
+	<h1>{{ airport.extended_name }} — {{ city.extended_name }} — {{ country.extended_name }}</h1>
+</div>
 {% include 'locations/snippets/info_block/airport.html' %}
 
 {% endblock content %}

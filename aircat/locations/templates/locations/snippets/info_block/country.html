@@ -1,21 +1,26 @@
-<table>
-	<caption>
-		<a href="{{ country.get_absolute_url }}">{{ country.name_ru_preferable|upper }}</a>
-	</caption>
-	<tr>
-		<th>ISO код</th>
-		<td>{{ country.iso_code }}</td>
-	</tr>
-	<tr>
-		<th>Название на английском</th>
-		<td>{{ country.name }}</td>
-	</tr>
-	<tr>
-		<th>Название на русском</th>
-		<td>{{ country.name_ru|default:"—" }}</td>
-	</tr>
-	<tr>
-		<th>Координаты (Ш, Д)</th>
-		<td>{{ country.latitude|floatformat:6 }}, {{ country.longitude|floatformat:6 }}</td>
-	</tr>
-</table>
+<section class="info-block">
+	<a class="title" href="{{ country.get_absolute_url }}">{{ country.name_ru_preferable|upper }}</a>
+	<table class="table table-condensed table-bordered">
+		<tr>
+			<th>ISO код</th>
+			<td>{{ country.iso_code }}</td>
+		</tr>
+		<tr>
+			<th>Название на английском</th>
+			<td>{{ country.name }}</td>
+		</tr>
+		<tr>
+			<th>Название на русском</th>
+			<td>{{ country.name_ru|default:"—" }}</td>
+		</tr>
+		<tr>
+			<th>Координаты (Ш, Д)</th>
+			<td>{{ country.latitude|floatformat:6 }}, {{ country.longitude|floatformat:6 }}</td>
+		</tr>
+	</table>
+	{% if with_list_btn %}
+		<p>
+			<a class="btn btn-block" href="{% url 'loc:cities' country=country.iso_code %}">список городов</a>
+		</p>
+	{% endif %}
+</section>

@@ -4,9 +4,11 @@
 
 {% block content %}
 
-<h1>Список стран</h1>
+<div class="page-header">
+	<h1>Список стран</h1>
+</div>
 <p>Выберите страну для просмотра списка городов в ней.</p>
-<ul>
+<ul class="unstyled">
 {% for country in country_list %}
 	<li><a href="{% url 'loc:cities' country=country.iso_code %}">{{ country.extended_name }}</a></li>
 {% empty %}

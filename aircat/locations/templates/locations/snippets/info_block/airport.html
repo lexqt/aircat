@@ -1,25 +1,25 @@
-<table>
-	<caption>
-		<a href="{{ airport.get_absolute_url }}">{{ airport.name_ru_preferable|upper }}</a>
-	</caption>
-	<tr>
-		<th>Страна</th>
-		<td><a href="{{ airport.city.country.get_absolute_url }}">{{ airport.city.country.extended_name }}</a></td>
-	</tr>
-	<tr>
-		<th>Город</th>
-		<td><a href="{{ airport.city.get_absolute_url }}">{{ airport.city.extended_name }}</a></td>
-	</tr>
-	<tr>
-		<th>Название на английском</th>
-		<td>{{ airport.name }}</td>
-	</tr>
-	<tr>
-		<th>Название на русском</th>
-		<td>{{ airport.name_ru|default:"—" }}</td>
-	</tr>
-	<tr>
-		<th>Координаты (Ш, Д, В)</th>
-		<td>{{ airport.latitude|floatformat:6 }}, {{ airport.longitude|floatformat:6 }}, {{ airport.altitude }}</td>
-	</tr>
-</table>
+<section class="info-block">
+	<a class="title" href="{{ airport.get_absolute_url }}">{{ airport.name_ru_preferable|upper }}</a>
+	<table class="table table-condensed table-bordered">
+		<tr>
+			<th>Страна</th>
+			<td><a href="{{ airport.city.country.get_absolute_url }}">{{ airport.city.country.extended_name }}</a></td>
+		</tr>
+		<tr>
+			<th>Город</th>
+			<td><a href="{{ airport.city.get_absolute_url }}">{{ airport.city.extended_name }}</a></td>
+		</tr>
+		<tr>
+			<th>Название на английском</th>
+			<td>{{ airport.name }}</td>
+		</tr>
+		<tr>
+			<th>Название на русском</th>
+			<td>{{ airport.name_ru|default:"—" }}</td>
+		</tr>
+		<tr>
+			<th>Координаты (Ш, Д, В)</th>
+			<td>{{ airport.latitude|floatformat:6 }}, {{ airport.longitude|floatformat:6 }}, {{ airport.altitude }}</td>
+		</tr>
+	</table>
+</section>

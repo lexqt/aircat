@@ -1,0 +1,55 @@
+/* Sticky footer styles */
+
+html, body {
+  height: 100%;
+}
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -60px;
+}
+#push, #footer {
+  height: 60px;
+}
+#footer {
+  background-color: #f5f5f5;
+}
+
+/* Misc */
+
+body {
+  background: #ffffff url("../img/bg.jpg") center top repeat-x;
+  background-size: contain;
+}
+#wrap > .navbar {
+  margin-bottom: 20px;
+}
+#footer .container {
+  padding-top: 20px;
+}
+
+.aircat-promo {
+  background-color: white;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 20px 5px #9CB0CA;
+  box-shadow: 5px 5px 20px 5px #9CB0CA;
+}
+
+.info-block {
+  width: 500px;
+  padding: 5px;
+  margin-bottom: 20px;
+  background-color: white;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+  -webkit-box-shadow: 2px 2px 10px 2px #9CB0CA;
+  box-shadow: 2px 2px 10px 2px #9CB0CA;
+}
+.info-block .title {
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+}
