@@ -1,3 +1,5 @@
+{% load location_utils %}
+
 <section class="info-block">
 	<a class="title" href="{{ country.get_absolute_url }}">{{ country.name_ru_preferable|upper }}</a>
 	<table class="table table-condensed table-bordered">
@@ -15,7 +17,10 @@
 		</tr>
 		<tr>
 			<th>Координаты (Ш, Д)</th>
-			<td>{{ country.latitude|floatformat:6 }}, {{ country.longitude|floatformat:6 }}</td>
+			<td>
+				{{ country.latitude|floatformat:6 }}, {{ country.longitude|floatformat:6 }}<br>
+				<a href="{% gmaps_url country %}"><i class="icon-map-marker"></i> Google Maps</a>
+			</td>
 		</tr>
 	</table>
 	{% if with_list_btn %}

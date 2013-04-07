@@ -1,6 +1,12 @@
+{% load location_utils %}
+
 <section class="info-block">
 	<a class="title" href="{{ airport.get_absolute_url }}">{{ airport.name_ru_preferable|upper }}</a>
 	<table class="table table-condensed table-bordered">
+		<tr>
+			<th>Код IATA</th>
+			<td>{{ airport.iata_code }}</td>
+		</tr>
 		<tr>
 			<th>Страна</th>
 			<td><a href="{{ airport.city.country.get_absolute_url }}">{{ airport.city.country.extended_name }}</a></td>
@@ -19,7 +25,10 @@
 		</tr>
 		<tr>
 			<th>Координаты (Ш, Д, В)</th>
-			<td>{{ airport.latitude|floatformat:6 }}, {{ airport.longitude|floatformat:6 }}, {{ airport.altitude }}</td>
+			<td>
+				{{ airport.latitude|floatformat:6 }}, {{ airport.longitude|floatformat:6 }}, {{ airport.altitude }}<br>
+				<a href="{% gmaps_url airport %}"><i class="icon-map-marker"></i> Google Maps</a>
+			</td>
 		</tr>
 	</table>
 </section>
