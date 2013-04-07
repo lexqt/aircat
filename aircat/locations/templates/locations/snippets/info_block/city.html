@@ -1,0 +1,21 @@
+<table>
+	<caption>
+		<a href="{{ city.get_absolute_url }}">{{ city.name_ru_preferable|upper }}</a>
+	</caption>
+	<tr>
+		<th>Страна</th>
+		<td><a href="{{ city.country.get_absolute_url }}">{{ city.country.extended_name }}</a></td>
+	</tr>
+	<tr>
+		<th>Название на английском</th>
+		<td>{{ city.name }}</td>
+	</tr>
+	<tr>
+		<th>Название на русском</th>
+		<td>{{ city.name_ru|default:"—" }}</td>
+	</tr>
+	<tr>
+		<th>Координаты (Ш, Д)</th>
+		<td>{{ city.latitude|floatformat:6 }}, {{ city.longitude|floatformat:6 }}</td>
+	</tr>
+</table>

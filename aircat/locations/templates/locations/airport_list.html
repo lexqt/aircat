@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ city.name_ru_preferable }} — {{ country.name_ru_preferable }} — Список аэропортов{% endblock %}
+
+{% block content %}
+
+<h1>{{ city.name_ru_preferable }} — {{ country.name_ru_preferable }}</h1>
+{% include 'locations/snippets/info_block/city.html' %}
+
+<h2>Список аэропортов</h2>
+<ul>
+{% for airport in airport_list %}
+	<li><a href="{% url 'loc:airport' slug=airport.slug %}">{{ airport.extended_name }}</a></li>
+{% empty %}
+	<li>В БД не внесен ни один аэропорт для выбранного города.</li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

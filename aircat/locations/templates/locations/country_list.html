@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Список стран{% endblock %}
+
+{% block content %}
+
+<h1>Список стран</h1>
+<p>Выберите страну для просмотра списка городов в ней.</p>
+<ul>
+{% for country in country_list %}
+	<li><a href="{% url 'loc:cities' country=country.iso_code %}">{{ country.extended_name }}</a></li>
+{% empty %}
+	<li>В БД не внесена ни одна страна.</li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

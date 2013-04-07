@@ -3,9 +3,9 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.core.urlresolvers import reverse
 from django.core.validators import MinLengthValidator
 from django.utils.text import slugify
-
 
 class Location(models.Model):
 
@@ -28,6 +28,15 @@ class Location(models.Model):
         if self.name_ru:
             return '{0} ({1})'.format(self.name, self.name_ru)
         return self.name
+
+    def name_ru_preferable(self):
+        return self.name_ru if self.name_ru else self.name
+
+    def get_absolute_url(self):
+        url_name = (self.__class__.__name__.lower()
+                        if not hasattr(self, '_url_name')
+                        else self._url_name)
+        return reverse('loc:{0}'.format(url_name), kwargs={'slug': self.slug})
 
     def __unicode__(self):
         return self.name

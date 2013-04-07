@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ city.extended_name }} — {{ country.extended_name }}{% endblock %}
+
+{% block content %}
+
+<h1>{{ city.extended_name }} — {{ country.extended_name }}</h1>
+{% include 'locations/snippets/info_block/city.html' %}
+
+<p>
+	Открыть <a href="{% url 'loc:airports' city=city.id %}">список аэропортов</a>.
+</p>
+
+{% endblock content %}

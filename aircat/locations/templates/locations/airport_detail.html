@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ airport.extended_name }} — {{ city.extended_name }} — {{ country.extended_name }}{% endblock %}
+
+{% block content %}
+
+<h1>{{ airport.extended_name }} — {{ city.extended_name }} — {{ country.extended_name }}</h1>
+{% include 'locations/snippets/info_block/airport.html' %}
+
+{% endblock content %}
